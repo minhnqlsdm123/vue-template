@@ -35,13 +35,10 @@
                     .post('/api/category/add',formdata)
                     .then((response)=>{
                         console.log(response.data)
-                        this.flashMessage.success({
-                            title: 'Success Message Title',
-                            message: 'Hoorah, it is my fist npm package and it works!',
-
-                        });
-
-
+                        toast.fire({
+                            icon:'success',
+                            text:'Add new Category successfully !'
+                        })
                         this.$router.push({name:'AllCategory'})
                     })
                     .catch((error)=>{
@@ -51,9 +48,11 @@
                             break
 
                             default:
-                                this.flash('Some error occurred, please try again !','error',{
-                                    timeout:3000
-                                });
+                                toast.fire({
+                                    icon:'error',
+                                    text:'Oopp, something wrongg !'
+                                })
+
                         }
 
                     })

@@ -26,12 +26,13 @@
     "dependencies": {
         "@deveodk/vue-toastr": "^1.1.0",
         "@smartweb/vue-flash-message": "^0.6.4",
-        "sweetalert2": "^9.10.12",
+        "sweetalert2": "^9.13.1",
         "vue-axios": "^2.1.5",
         "vue-flash-message": "^0.7.2",
         "vue-link": "^1.6.1",
         "vue-router": "^3.1.6",
         "vue-swal": "^1.0.0",
+        "vue-sweetalert2": "^3.0.5",
         "vuex": "^3.4.0"
     }
 }

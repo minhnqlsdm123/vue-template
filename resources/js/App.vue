@@ -5,7 +5,7 @@
         <SideBar/>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
+            <!-- Content Header (Client header) -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -28,7 +28,6 @@
                 <router-view></router-view>
             </div>
             <!-- /.content -->
-            <flash-message  position="right top" style="width: auto"></flash-message>
 
         </div>
         <!-- /.content-wrapper -->
@@ -39,9 +38,9 @@
     <!-- ./wrapper -->
 </template>
 <script>
-    import Header from './components/_layout/Header.vue';
-    import SideBar from './components/_layout/SideBar.vue';
-    import Footer from './components/_layout/Footer.vue';
+    import Header from './components/Admin/_layout/Header.vue';
+    import SideBar from './components/Admin/_layout/SideBar.vue';
+    import Footer from './components/Admin/_layout/Footer.vue';
     export default {
         components:{
             Header,

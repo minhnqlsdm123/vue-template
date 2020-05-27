@@ -27,7 +27,7 @@
                          with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="fa fa-adjust" aria-hidden="true"></i>
                             <p>
                                 Category
                                 <i class="right fas fa-angle-left"></i>
@@ -35,16 +35,56 @@
                         </a>
                         <ul class="nav nav-treeview">
                            <router-link :to="{name:'AllCategory'}"  class="nav-link">
-                                       <i class="far fa-circle nav-icon"></i>
+                               <i class="fa fa-minus" aria-hidden="true"></i>
                                        <p>Index</p>
                            </router-link>
                         </ul>
                         <ul class="nav nav-treeview">
                             <router-link :to="{name:'AddCategory'}"  class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+
                                 <p>ADD</p>
                             </router-link>
                         </ul>
+                    </li>
+                    <li class="nav-item has-treeview menu open">
+                        <a href="#" class="nav-link active">
+                            <i class="fa fa-newspaper" aria-hidden="true"></i>
+                            <p>
+                                Post
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <router-link :to="{name:'AllPost'}"  class="nav-link">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                <p>Index</p>
+                            </router-link>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <router-link :to="{name:'AddPost'}"  class="nav-link">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+
+                                <p>ADD</p>
+                            </router-link>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview menu open">
+                        <a href="" class="nav-link active">
+                            <i class="fa fa-compress" aria-hidden="true"></i>
+                            <p>
+                                Contact
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <router-link :to="{name:'AdminContact'}"  class="nav-link">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                <p>Index</p>
+                            </router-link>
+                        </ul>
+
                     </li>
 
                 </ul>

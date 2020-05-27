@@ -19734,7 +19734,7 @@ function pageSize2widthAndHeight(pageSize) {
 	if (isString(pageSize)) {
 		var size = sizes[pageSize.toUpperCase()];
 		if (!size) {
-			throw 'Page size ' + pageSize + ' not recognized';
+			throw 'Client size ' + pageSize + ' not recognized';
 		}
 		return { width: size[0], height: size[1] };
 	}
@@ -19812,7 +19812,7 @@ function renderLine(line, x, y, pdfKitDoc) {
 		var textTools = new TextTools(null);
 
 		if (isUndefined(_pageNodeRef.positions)) {
-			throw 'Page reference id not found';
+			throw 'Client reference id not found';
 		}
 
 		var pageNumber = _pageNodeRef.positions[0].pageNumber.toString();
@@ -20699,7 +20699,7 @@ var PDFPage = /*#__PURE__*/function () {
     }); // The page dictionary
 
     this.dictionary = this.document.ref({
-      Type: 'Page',
+      Type: 'Client',
       Parent: this.document._root.data.Pages,
       MediaBox: [0, 0, this.width, this.height],
       Contents: this.content,

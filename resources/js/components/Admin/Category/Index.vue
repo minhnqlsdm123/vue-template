@@ -56,12 +56,37 @@ export default {
                 })
         },
         DeleteCategory(id){
-            this.axios
-                .delete('/api/category/delete/' + id)
-                .then((response)=>{
-                    console.log(response.data)
-                    this.categories.map(item=>item.id).indexOf(id)
-                    this.getDataCategory()
+            toast.fire({
+                icon:'warning',
+                title:'Do you want delete?',
+                showCancelButton:'true',
+                showConfirmButton:'true',
+                confirmButtonColor:'#007bff',
+                cancelButtonColor:'#dc3545',
+
+            })
+            .then((result)=>{
+                if (result.value){
+                    this.axios
+                        .delete('/api/category/delete/' + id)
+                        .then((response)=>{
+                            console.log(response.data)
+                            this.categories.map(item=>item.id).indexOf(id)
+                            toast.fire({
+                                icon:'success',
+                                title:'Deleted',
+                                text:'Delete category successfully !'
+                            })
+                            this.getDataCategory()
+                        })
+                }
+            })
+            .catch(()=>{
+                    toast.fire({
+                        icon:'error',
+                        title:'Ooppp, something wrong ?',
+                        text:'You ckeck ....'
+                    })
                 })
         }
     }

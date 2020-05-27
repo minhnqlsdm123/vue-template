@@ -16,8 +16,10 @@
 <body>
 
 <div id="app">
+    <adminmain/>
 
 </div>
+
 <script src="{{asset('asset/plugins/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
 <!-- jQuery -->

@@ -13,8 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix'=>'auth'],function (){
+    Route::post('register','AuthController@register');
+    Route::post('login','AuthController@login');
 });
 
 Route::group(['prefix'=>'category'],function(){
@@ -24,4 +25,19 @@ Route::group(['prefix'=>'category'],function(){
     Route::post('/update/{id}','CategoriesController@update');
     Route::delete('/delete/{id}','CategoriesController@delete');
 });
+
+Route::group(['prefix'=>'post'],function () {
+   Route::get('/','PostController@index');
+   Route::post('/add','PostController@form');
+   Route::get('/edit/{id}','PostController@edit');
+   Route::post('/update/{id}','PostController@update');
+   Route::delete('/delete/{id}','PostController@delete');
+});
+
+Route::group(['prefix'=>'contact'],function (){
+   Route::get('/','ContactController@index');
+});
+
+Route::get('/home','HomeController@index');
+Route::get('/contact','HomeController@contact');
 

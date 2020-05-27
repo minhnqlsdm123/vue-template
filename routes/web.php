@@ -12,7 +12,13 @@
 */
 
 
-Route::get('{any}', function () {
-    return view('app');
-})->where('any','.*');
+//Route::get('{any}', function () {
+//    return view('app');
+//})->where('any','.*');
+Route::get('/admin/', function () {
+    return view('admin_master');
+});
 
+Route::get('/', function (){
+   return view('master');
+});
