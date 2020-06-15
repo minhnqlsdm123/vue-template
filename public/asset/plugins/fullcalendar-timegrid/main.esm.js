@@ -596,7 +596,7 @@ var TimeGrid = /** @class */ (function (_super) {
         var dayStart = startOfDay(dateProfile.renderRange.start);
         var slotTime = dateProfile.minTime;
         var slotIterator = createDuration(0);
-        var slotDate; // will be on the view's first day, but we only care about its time
+        var slotDate; // will be on the views's first day, but we only care about its time
         var isLabeled;
         var axisHtml;
         // Calculate the time for each slot
@@ -658,7 +658,7 @@ var TimeGrid = /** @class */ (function (_super) {
     };
     /* Content Skeleton
     ------------------------------------------------------------------------------------------------------------------*/
-    // Renders the DOM that the view's content will live in
+    // Renders the DOM that the views's content will live in
     TimeGrid.prototype.renderContentSkeleton = function () {
         var isRtl = this.context.isRtl;
         var parts = [];
@@ -748,7 +748,7 @@ var TimeGrid = /** @class */ (function (_super) {
             nodes.push(lineEl);
         }
         // render an arrow over the axis
-        if (segs.length > 0) { // is the current time in view?
+        if (segs.length > 0) { // is the current time in views?
             var arrowEl = createElement('div', { className: 'fc-now-indicator fc-now-indicator-arrow' });
             arrowEl.style.top = top + 'px';
             this.contentSkeletonEl.appendChild(arrowEl);
@@ -1043,7 +1043,7 @@ var AbstractTimeGridView = /** @class */ (function (_super) {
         this.renderSkeleton.unrender();
     };
     AbstractTimeGridView.prototype._renderSkeleton = function (context) {
-        this.el.classList.add('fc-timeGrid-view');
+        this.el.classList.add('fc-timeGrid-views');
         this.el.innerHTML = this.renderSkeletonHtml();
         this.scroller = new ScrollComponent('hidden', // overflow x
         'auto' // overflow y
@@ -1058,7 +1058,7 @@ var AbstractTimeGridView = /** @class */ (function (_super) {
             renderIntroHtml: this.renderTimeGridIntroHtml
         });
         if (context.options.allDaySlot) { // should we display the "all-day" area?
-            this.dayGrid = new DayGrid(// the all-day subcomponent of this view
+            this.dayGrid = new DayGrid(// the all-day subcomponent of this views
             this.el.querySelector('.fc-day-grid'), {
                 renderNumberIntroHtml: this.renderDayGridIntroHtml,
                 renderBgIntroHtml: this.renderDayGridBgIntroHtml,
@@ -1072,7 +1072,7 @@ var AbstractTimeGridView = /** @class */ (function (_super) {
         }
     };
     AbstractTimeGridView.prototype._unrenderSkeleton = function () {
-        this.el.classList.remove('fc-timeGrid-view');
+        this.el.classList.remove('fc-timeGrid-views');
         this.timeGrid.destroy();
         if (this.dayGrid) {
             this.dayGrid.destroy();
@@ -1081,7 +1081,7 @@ var AbstractTimeGridView = /** @class */ (function (_super) {
     };
     /* Rendering
     ------------------------------------------------------------------------------------------------------------------*/
-    // Builds the HTML skeleton for the view.
+    // Builds the HTML skeleton for the views.
     // The day-grid and time-grid components will render inside containers defined by this HTML.
     AbstractTimeGridView.prototype.renderSkeletonHtml = function () {
         var _a = this.context, theme = _a.theme, options = _a.options;
@@ -1126,7 +1126,7 @@ var AbstractTimeGridView = /** @class */ (function (_super) {
             this.dayGrid.updateSize(isResize);
         }
     };
-    // Adjusts the vertical dimensions of the view to the specified values
+    // Adjusts the vertical dimensions of the views to the specified values
     AbstractTimeGridView.prototype.updateBaseSize = function (isResize, viewHeight, isAuto) {
         var _this = this;
         var eventLimit;
@@ -1134,7 +1134,7 @@ var AbstractTimeGridView = /** @class */ (function (_super) {
         var scrollbarWidths;
         // make all axis cells line up
         this.axisWidth = matchCellWidths(findElements(this.el, '.fc-axis'));
-        // hack to give the view some height prior to timeGrid's columns being rendered
+        // hack to give the views some height prior to timeGrid's columns being rendered
         // TODO: separate setting height from scroller VS timeGrid.
         if (!this.timeGrid.colEls) {
             if (!isAuto) {
@@ -1185,7 +1185,7 @@ var AbstractTimeGridView = /** @class */ (function (_super) {
             }
         }
     };
-    // given a desired total height of the view, returns what the height of the scroller should be
+    // given a desired total height of the views, returns what the height of the scroller should be
     AbstractTimeGridView.prototype.computeScrollerHeight = function (viewHeight) {
         return viewHeight -
             subtractInnerElHeight(this.el, this.scroller.el); // everything that's NOT the scroller

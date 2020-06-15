@@ -1455,7 +1455,7 @@ var EventDragging = /** @class */ (function (_super) {
                                 eventInstanceId: eventInstance.instanceId
                             });
                         }
-                        var dropArg = __assign({}, receivingCalendar.buildDatePointApi(finalHit.dateSpan), { draggedEl: ev.subjectEl, jsEvent: ev.origEvent, view: finalHit.component // should this be finalHit.component.view? See #4644
+                        var dropArg = __assign({}, receivingCalendar.buildDatePointApi(finalHit.dateSpan), { draggedEl: ev.subjectEl, jsEvent: ev.origEvent, view: finalHit.component // should this be finalHit.component.views? See #4644
                          });
                         receivingCalendar.publiclyTrigger('drop', [dropArg]);
                         receivingCalendar.publiclyTrigger('eventReceive', [
@@ -1463,7 +1463,7 @@ var EventDragging = /** @class */ (function (_super) {
                                 draggedEl: ev.subjectEl,
                                 event: new EventApi(// the data AFTER the mutation
                                 receivingCalendar, mutatedRelevantEvents.defs[eventDef.defId], mutatedRelevantEvents.instances[eventInstance.instanceId]),
-                                view: finalHit.component // should this be finalHit.component.view? See #4644
+                                view: finalHit.component // should this be finalHit.component.views? See #4644
                             }
                         ]);
                     }

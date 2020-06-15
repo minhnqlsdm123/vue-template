@@ -6,3 +6,25 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
+.modal-backdrop {
+  background-color: rgba(0,0,0,0.8) !important;
+}
+.inputImage{
+height: 45px;
+}
+.w-h-100px{
+  width: 100px;
+  height: 100px;
+}
+.description-align-center{
+ text-align: center;
+}
+.w-h-image-cover{
+  width: 300px;
+  height: 300px;
+}
+.box-footer{
+  padding-top: 10%;
+}

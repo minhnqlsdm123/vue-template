@@ -5722,7 +5722,7 @@
                  *
                  *    Possible scroll settings are:
                  *    'always'      Scrolls always.
-                 *    'ifneeded'    Scrolls only if the element isnt fully in view.
+                 *    'ifneeded'    Scrolls only if the element isnt fully in views.
                  *    'never'       Scrolls never.
                  *
                  *    Possible block settings are:

@@ -38,14 +38,5 @@
     <!-- ./wrapper -->
 </template>
 <script>
-    import Header from './components/Admin/_layout/Header.vue';
-    import SideBar from './components/Admin/_layout/SideBar.vue';
-    import Footer from './components/Admin/_layout/Footer.vue';
-    export default {
-        components:{
-            Header,
-            SideBar,
-            Footer
-        }
-    }
+
 </script>

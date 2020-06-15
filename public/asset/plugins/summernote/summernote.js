@@ -6473,7 +6473,7 @@ function () {
     key: "purify",
     value: function purify(value) {
       if (this.options.codeviewFilter) {
-        // filter code view regex
+        // filter code views regex
         value = value.replace(this.options.codeviewFilterRegex, ''); // allow specific iframe tag
 
         if (this.options.codeviewIframeFilter) {
@@ -6520,7 +6520,7 @@ function () {
       return value;
     }
     /**
-     * activate code view
+     * activate code views
      */
 
   }, {
@@ -6564,7 +6564,7 @@ function () {
       }
     }
     /**
-     * deactivate code view
+     * deactivate code views
      */
 
   }, {

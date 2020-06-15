@@ -76,7 +76,7 @@
         // Panning: tell if panning action is in progress
         self.panning = false;
 
-        // Animate view box
+        // Animate views box
         self.zoomAnimID = null; // Interval handler (used to set and clear)
         self.zoomAnimStartTime = null; // Animation start time
         self.zoomAnimCVBTarget = null; // Current ViewBox target
@@ -802,7 +802,7 @@
          * If an area ID is specified, the algorithm will override the zoom level to focus on the area
          * but it may be limited by the min/max zoom level limits set at initialization.
          *
-         * If no coordinates are specified, the zoom will be focused on the center of the current view box
+         * If no coordinates are specified, the zoom will be focused on the center of the current views box
          *
          */
         onZoomEvent: function (e, zoomOptions) {
@@ -2264,7 +2264,7 @@
         },
 
         /*
-         * Animated view box changes
+         * Animated views box changes
          * As from http://code.voidblossom.com/animating-viewbox-easing-formulas/,
          * (from https://github.com/theshaun works on mapael)
          * @param x coordinate of the point to focus on
@@ -2490,7 +2490,7 @@
             self.currentViewBox.y = y;
             self.currentViewBox.w = w;
             self.currentViewBox.h = h;
-            // Perform set view box
+            // Perform set views box
             self.paper.setViewBox(x, y, w, h, false);
         },
 

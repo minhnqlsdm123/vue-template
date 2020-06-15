@@ -162,7 +162,7 @@ DataTable.ext.buttons.print = {
 			html+
 			'<div>'+(exportInfo.messageBottom || '')+'</div>';
 
-		$(win.document.body).addClass('dt-print-view');
+		$(win.document.body).addClass('dt-print-views');
 
 		$('img', win.document.body).each( function ( i, img ) {
 			img.setAttribute( 'src', _relToAbs( img.getAttribute('src') ) );

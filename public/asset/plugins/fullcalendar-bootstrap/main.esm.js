@@ -55,11 +55,11 @@ BootstrapTheme.prototype.classes = {
     popoverHeader: 'card-header',
     popoverContent: 'card-body',
     // day grid
-    // for left/right border color when border is inset from edges (all-day in timeGrid view)
+    // for left/right border color when border is inset from edges (all-day in timeGrid views)
     // avoid `table` class b/c don't want margins/padding/structure. only border color.
     headerRow: 'table-bordered',
     dayRow: 'table-bordered',
-    // list view
+    // list views
     listView: 'card card-primary'
 };
 BootstrapTheme.prototype.baseIconClass = 'fa';

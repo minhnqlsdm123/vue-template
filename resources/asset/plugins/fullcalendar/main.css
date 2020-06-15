@@ -852,7 +852,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 
 .fc-view,
 .fc-view > table {
-  /* so dragged elements can be above the view's main element */
+  /* so dragged elements can be above the views's main element */
   position: relative;
   z-index: 1;
 }
@@ -904,7 +904,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     height: auto !important;
     /* undo height that JS set in distributeHeight */
     min-height: 0 !important;
-    /* undo the min-height from each view's specific stylesheet */
+    /* undo the min-height from each views's specific stylesheet */
   }
 
   .fc tbody .fc-row .fc-content-skeleton {
@@ -926,7 +926,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     height: 1em;
   }
 
-  /* Undo month-view event limiting. Display all events and hide the "more" links
+  /* Undo month-views event limiting. Display all events and hide the "more" links
   --------------------------------------------------------------------------------------------------*/
   .fc-more-cell,
 .fc-more {

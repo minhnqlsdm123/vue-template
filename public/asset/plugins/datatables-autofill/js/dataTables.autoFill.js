@@ -824,10 +824,10 @@ $.extend( AutoFill.prototype, {
 
 	/**
 	 * Move the window and DataTables scrolling during a drag to scroll new
-	 * content into view. This is done by proximity to the edge of the scrolling
+	 * content into views. This is done by proximity to the edge of the scrolling
 	 * container of the mouse - for example near the top edge of the window
 	 * should scroll up. This is a little complicated as there are two elements
-	 * that can be scrolled - the window and the DataTables scrolling view port
+	 * that can be scrolled - the window and the DataTables scrolling views port
 	 * (if scrollX and / or scrollY is enabled).
 	 *
 	 * @param  {object} e Mouse move event object

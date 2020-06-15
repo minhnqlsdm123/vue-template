@@ -599,7 +599,7 @@ Docs & License: https://fullcalendar.io/
             var dayStart = core.startOfDay(dateProfile.renderRange.start);
             var slotTime = dateProfile.minTime;
             var slotIterator = core.createDuration(0);
-            var slotDate; // will be on the view's first day, but we only care about its time
+            var slotDate; // will be on the views's first day, but we only care about its time
             var isLabeled;
             var axisHtml;
             // Calculate the time for each slot
@@ -661,7 +661,7 @@ Docs & License: https://fullcalendar.io/
         };
         /* Content Skeleton
         ------------------------------------------------------------------------------------------------------------------*/
-        // Renders the DOM that the view's content will live in
+        // Renders the DOM that the views's content will live in
         TimeGrid.prototype.renderContentSkeleton = function () {
             var isRtl = this.context.isRtl;
             var parts = [];
@@ -751,7 +751,7 @@ Docs & License: https://fullcalendar.io/
                 nodes.push(lineEl);
             }
             // render an arrow over the axis
-            if (segs.length > 0) { // is the current time in view?
+            if (segs.length > 0) { // is the current time in views?
                 var arrowEl = core.createElement('div', { className: 'fc-now-indicator fc-now-indicator-arrow' });
                 arrowEl.style.top = top + 'px';
                 this.contentSkeletonEl.appendChild(arrowEl);
@@ -1046,7 +1046,7 @@ Docs & License: https://fullcalendar.io/
             this.renderSkeleton.unrender();
         };
         AbstractTimeGridView.prototype._renderSkeleton = function (context) {
-            this.el.classList.add('fc-timeGrid-view');
+            this.el.classList.add('fc-timeGrid-views');
             this.el.innerHTML = this.renderSkeletonHtml();
             this.scroller = new core.ScrollComponent('hidden', // overflow x
             'auto' // overflow y
@@ -1061,7 +1061,7 @@ Docs & License: https://fullcalendar.io/
                 renderIntroHtml: this.renderTimeGridIntroHtml
             });
             if (context.options.allDaySlot) { // should we display the "all-day" area?
-                this.dayGrid = new daygrid.DayGrid(// the all-day subcomponent of this view
+                this.dayGrid = new daygrid.DayGrid(// the all-day subcomponent of this views
                 this.el.querySelector('.fc-day-grid'), {
                     renderNumberIntroHtml: this.renderDayGridIntroHtml,
                     renderBgIntroHtml: this.renderDayGridBgIntroHtml,
@@ -1075,7 +1075,7 @@ Docs & License: https://fullcalendar.io/
             }
         };
         AbstractTimeGridView.prototype._unrenderSkeleton = function () {
-            this.el.classList.remove('fc-timeGrid-view');
+            this.el.classList.remove('fc-timeGrid-views');
             this.timeGrid.destroy();
             if (this.dayGrid) {
                 this.dayGrid.destroy();
@@ -1084,7 +1084,7 @@ Docs & License: https://fullcalendar.io/
         };
         /* Rendering
         ------------------------------------------------------------------------------------------------------------------*/
-        // Builds the HTML skeleton for the view.
+        // Builds the HTML skeleton for the views.
         // The day-grid and time-grid components will render inside containers defined by this HTML.
         AbstractTimeGridView.prototype.renderSkeletonHtml = function () {
             var _a = this.context, theme = _a.theme, options = _a.options;
@@ -1129,7 +1129,7 @@ Docs & License: https://fullcalendar.io/
                 this.dayGrid.updateSize(isResize);
             }
         };
-        // Adjusts the vertical dimensions of the view to the specified values
+        // Adjusts the vertical dimensions of the views to the specified values
         AbstractTimeGridView.prototype.updateBaseSize = function (isResize, viewHeight, isAuto) {
             var _this = this;
             var eventLimit;
@@ -1137,7 +1137,7 @@ Docs & License: https://fullcalendar.io/
             var scrollbarWidths;
             // make all axis cells line up
             this.axisWidth = core.matchCellWidths(core.findElements(this.el, '.fc-axis'));
-            // hack to give the view some height prior to timeGrid's columns being rendered
+            // hack to give the views some height prior to timeGrid's columns being rendered
             // TODO: separate setting height from scroller VS timeGrid.
             if (!this.timeGrid.colEls) {
                 if (!isAuto) {
@@ -1188,7 +1188,7 @@ Docs & License: https://fullcalendar.io/
                 }
             }
         };
-        // given a desired total height of the view, returns what the height of the scroller should be
+        // given a desired total height of the views, returns what the height of the scroller should be
         AbstractTimeGridView.prototype.computeScrollerHeight = function (viewHeight) {
             return viewHeight -
                 core.subtractInnerElHeight(this.el, this.scroller.el); // everything that's NOT the scroller

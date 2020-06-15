@@ -178,7 +178,7 @@ var Popover = /** @class */ (function () {
         else {
             left = 0;
         }
-        // constrain to the view port. if constrained by two edges, give precedence to top/left
+        // constrain to the views port. if constrained by two edges, give precedence to top/left
         top = Math.min(top, clippingRect.bottom - elDims.height - this.margin);
         top = Math.max(top, clippingRect.top + this.margin);
         left = Math.min(left, clippingRect.right - elDims.width - this.margin);
@@ -1182,7 +1182,7 @@ var DayGrid = /** @class */ (function (_super) {
             if (clickOption === 'popover') {
                 _this.showSegPopover(row, col, moreEl, reslicedAllSegs);
             }
-            else if (typeof clickOption === 'string') { // a view name
+            else if (typeof clickOption === 'string') { // a views name
                 calendar.zoomTo(date, clickOption);
             }
         });
@@ -1282,7 +1282,7 @@ var DayGrid = /** @class */ (function (_super) {
 }(DateComponent));
 
 var WEEK_NUM_FORMAT$1 = createFormatter({ week: 'numeric' });
-/* An abstract class for the daygrid views, as well as month view. Renders one or more rows of day cells.
+/* An abstract class for the daygrid views, as well as month views. Renders one or more rows of day cells.
 ----------------------------------------------------------------------------------------------------------------------*/
 // It is a manager for a DayGrid subcomponent, which does most of the heavy lifting.
 // It is responsible for managing width/height.
@@ -1367,7 +1367,7 @@ var AbstractDayGridView = /** @class */ (function (_super) {
         this.renderSkeleton.unrender();
     };
     AbstractDayGridView.prototype._renderSkeleton = function (context) {
-        this.el.classList.add('fc-dayGrid-view');
+        this.el.classList.add('fc-dayGrid-views');
         this.el.innerHTML = this.renderSkeletonHtml();
         this.scroller = new ScrollComponent('hidden', // overflow x
         'auto' // overflow y
@@ -1386,11 +1386,11 @@ var AbstractDayGridView = /** @class */ (function (_super) {
         });
     };
     AbstractDayGridView.prototype._unrenderSkeleton = function () {
-        this.el.classList.remove('fc-dayGrid-view');
+        this.el.classList.remove('fc-dayGrid-views');
         this.dayGrid.destroy();
         this.scroller.destroy();
     };
-    // Builds the HTML skeleton for the view.
+    // Builds the HTML skeleton for the views.
     // The day-grid component will render inside of a container defined by this HTML.
     AbstractDayGridView.prototype.renderSkeletonHtml = function () {
         var _a = this.context, theme = _a.theme, options = _a.options;
@@ -1428,14 +1428,14 @@ var AbstractDayGridView = /** @class */ (function (_super) {
         _super.prototype.updateSize.call(this, isResize, viewHeight, isAuto); // will call updateBaseSize. important that executes first
         this.dayGrid.updateSize(isResize);
     };
-    // Refreshes the horizontal dimensions of the view
+    // Refreshes the horizontal dimensions of the views
     AbstractDayGridView.prototype.updateBaseSize = function (isResize, viewHeight, isAuto) {
         var dayGrid = this.dayGrid;
         var eventLimit = this.context.options.eventLimit;
         var headRowEl = this.header ? this.header.el : null; // HACK
         var scrollerHeight;
         var scrollbarWidths;
-        // hack to give the view some height prior to dayGrid's columns being rendered
+        // hack to give the views some height prior to dayGrid's columns being rendered
         // TODO: separate setting height from scroller VS dayGrid.
         if (!dayGrid.rowEls) {
             if (!isAuto) {
@@ -1481,12 +1481,12 @@ var AbstractDayGridView = /** @class */ (function (_super) {
             this.scroller.lockOverflow(scrollbarWidths);
         }
     };
-    // given a desired total height of the view, returns what the height of the scroller should be
+    // given a desired total height of the views, returns what the height of the scroller should be
     AbstractDayGridView.prototype.computeScrollerHeight = function (viewHeight) {
         return viewHeight -
             subtractInnerElHeight(this.el, this.scroller.el); // everything that's NOT the scroller
     };
-    // Sets the height of just the DayGrid component in this view
+    // Sets the height of just the DayGrid component in this views
     AbstractDayGridView.prototype.setGridHeight = function (height, isAuto) {
         if (this.context.options.monthMode) {
             // if auto, make the height of each row the height that it would be if there were 6 weeks

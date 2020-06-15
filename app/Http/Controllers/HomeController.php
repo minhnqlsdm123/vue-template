@@ -2,20 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact;
-use App\Post;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $posts = Post::with('category')->orderBy('id','desc')->get();
-        return response($posts);
+//        $this->middleware('auth')->except('index');
     }
 
-    public function contact(){
-        $contacts=Contact::all();
-        return response($contacts);
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('Page/master');
+    }
+
+    public function admin()
+    {
+        return view('Admin/admin_master');
+    }
+
+    public function admin_auth(){
+        return view('Admin/auth');
     }
 }

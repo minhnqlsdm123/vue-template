@@ -3393,11 +3393,11 @@ function buildEventUiForKey(allUi, eventUiForKey, individualUi) {
     return stuff;
 }
 
-// Generates HTML for an anchor to another view into the calendar.
+// Generates HTML for an anchor to another views into the calendar.
 // Will either generate an <a> tag or a non-clickable <span> tag, depending on enabled settings.
 // `gotoOptions` can either be a DateMarker, or an object with the form:
 // { date, type, forceOff }
-// `type` is a view-type like "day" or "week". default value is "day".
+// `type` is a views-type like "day" or "week". default value is "day".
 // `attrs` and `innerHtml` are use to generate the rest of the HTML tag.
 function buildGotoAnchorHtml(allOptions, dateEnv, gotoOptions, attrs, innerHtml) {
     var date;
@@ -5257,14 +5257,14 @@ var DateProfileGenerator = /** @class */ (function () {
     }
     /* Date Range Computation
     ------------------------------------------------------------------------------------------------------------------*/
-    // Builds a structure with info about what the dates/ranges will be for the "prev" view.
+    // Builds a structure with info about what the dates/ranges will be for the "prev" views.
     DateProfileGenerator.prototype.buildPrev = function (currentDateProfile, currentDate) {
         var dateEnv = this.dateEnv;
         var prevDate = dateEnv.subtract(dateEnv.startOf(currentDate, currentDateProfile.currentRangeUnit), // important for start-of-month
         currentDateProfile.dateIncrement);
         return this.build(prevDate, -1);
     };
-    // Builds a structure with info about what the dates/ranges will be for the "next" view.
+    // Builds a structure with info about what the dates/ranges will be for the "next" views.
     DateProfileGenerator.prototype.buildNext = function (currentDateProfile, currentDate) {
         var dateEnv = this.dateEnv;
         var nextDate = dateEnv.add(dateEnv.startOf(currentDate, currentDateProfile.currentRangeUnit), // important for start-of-month
@@ -5308,8 +5308,8 @@ var DateProfileGenerator = /** @class */ (function () {
             // constraint for where prev/next operations can go and where events can be dragged/resized to.
             // an object with optional start and end properties.
             validRange: validRange,
-            // range the view is formally responsible for.
-            // for example, a month view might have 1st-31st, excluding padded dates
+            // range the views is formally responsible for.
+            // for example, a month views might have 1st-31st, excluding padded dates
             currentRange: currentInfo.range,
             // name of largest unit being displayed, like "month" or "week"
             currentRangeUnit: currentInfo.unit,
@@ -5417,7 +5417,7 @@ var DateProfileGenerator = /** @class */ (function () {
                 alignment = unit;
             }
         }
-        // if the view displays a single day or smaller
+        // if the views displays a single day or smaller
         if (asRoughDays(duration) <= 1) {
             if (this.isHiddenDay(start)) {
                 start = this.skipHiddenDays(start, direction);
@@ -5630,8 +5630,8 @@ function reduceDateProfile(currentDateProfile, action, currentDate, viewType, ca
             var generator = calendar.dateProfileGenerators[viewType];
             if (!generator) {
                 throw new Error(viewType ?
-                    'The FullCalendar view "' + viewType + '" does not exist. Make sure your plugins are loaded correctly.' :
-                    'No available FullCalendar view plugins.');
+                    'The FullCalendar views "' + viewType + '" does not exist. Make sure your plugins are loaded correctly.' :
+                    'No available FullCalendar views plugins.');
             }
             newDateProfile = generator.build(action.dateMarker || currentDate, undefined, true // forceToValid
             );
@@ -5865,7 +5865,7 @@ function buildViewDef(viewType, hash, defaultConfigs, overrideConfigs) {
     var superDef = null;
     if (superType) {
         if (superType === viewType) {
-            throw new Error('Can\'t have a custom view type that references itself');
+            throw new Error('Can\'t have a custom views type that references itself');
         }
         superDef = ensureViewDef(superType, hash, defaultConfigs, overrideConfigs);
     }
@@ -5873,7 +5873,7 @@ function buildViewDef(viewType, hash, defaultConfigs, overrideConfigs) {
         theClass = superDef.class;
     }
     if (!theClass) {
-        return null; // don't throw a warning, might be settings for a single-unit view
+        return null; // don't throw a warning, might be settings for a single-unit views
     }
     return {
         type: viewType,
@@ -5969,7 +5969,7 @@ function buildViewSpec(viewDef, overrideConfigs, optionsManager) {
             queryButtonText(optionsManager.dirDefaults) ||
             viewDef.defaults.buttonText ||
             queryButtonText(globalDefaults) ||
-            viewDef.type // fall back to given view name
+            viewDef.type // fall back to given views name
     };
 }
 
@@ -6175,7 +6175,7 @@ var CalendarComponent = /** @class */ (function (_super) {
     };
     CalendarComponent.prototype._renderSkeleton = function (context) {
         this.updateElClassNames(context);
-        prependToElement(this.el, this.contentEl = createElement('div', { className: 'fc-view-container' }));
+        prependToElement(this.el, this.contentEl = createElement('div', { className: 'fc-views-container' }));
         var calendar = context.calendar;
         for (var _i = 0, _a = calendar.pluginSystem.hooks.viewContainerModifiers; _i < _a.length; _i++) {
             var modifyViewContainer = _a[_i];
@@ -6366,7 +6366,7 @@ var CalendarComponent = /** @class */ (function (_super) {
 }(Component));
 // Title and Date Formatting
 // -----------------------------------------------------------------------------------------------------------------
-// Computes what the title at the top of the calendar should be for this view
+// Computes what the title at the top of the calendar should be for this views
 function computeTitle(dateProfile, viewOptions) {
     var range;
     // for views that span a large unit of time, show the proper interval, ignoring stray days before and after
@@ -6400,7 +6400,7 @@ function computeTitleFormat(dateProfile) {
         }
     }
 }
-// build a context scoped to the view
+// build a context scoped to the views
 function buildComponentContext(context, viewSpec, view) {
     return context.extend(viewSpec.options, view);
 }
@@ -6548,7 +6548,7 @@ StandardTheme.prototype.classes = {
     // day grid
     headerRow: 'fc-widget-header',
     dayRow: 'fc-widget-content',
-    // list view
+    // list views
     listView: 'fc-widget-content'
 };
 StandardTheme.prototype.baseIconClass = 'fc-icon';
@@ -6740,7 +6740,7 @@ var Calendar = /** @class */ (function () {
                 }
             }
             if (oldState.dateProfile !== newState.dateProfile) {
-                if (oldState.dateProfile && view) { // why would view be null!?
+                if (oldState.dateProfile && view) { // why would views be null!?
                     this.publiclyTrigger('datesDestroy', [
                         {
                             view: view,
@@ -6751,7 +6751,7 @@ var Calendar = /** @class */ (function () {
                 this.isDatesUpdated = true;
             }
             if (oldState.viewType !== newState.viewType) {
-                if (oldState.viewType && view) { // why would view be null!?
+                if (oldState.viewType && view) { // why would views be null!?
                     this.publiclyTrigger('viewSkeletonDestroy', [
                         {
                             view: view,
@@ -6991,7 +6991,7 @@ var Calendar = /** @class */ (function () {
     };
     // View
     // -----------------------------------------------------------------------------------------------------------------
-    // Returns a boolean about whether the view is okay to instantiate at some point
+    // Returns a boolean about whether the views is okay to instantiate at some point
     Calendar.prototype.isValidViewType = function (viewType) {
         return Boolean(this.viewSpecs[viewType]);
     };
@@ -7013,8 +7013,8 @@ var Calendar = /** @class */ (function () {
             dateMarker: dateMarker
         });
     };
-    // Forces navigation to a view for the given date.
-    // `viewType` can be a specific view name or a generic one like "week" or "day".
+    // Forces navigation to a views for the given date.
+    // `viewType` can be a specific views name or a generic one like "week" or "day".
     // needs to change
     Calendar.prototype.zoomTo = function (dateMarker, viewType) {
         var spec;
@@ -7036,7 +7036,7 @@ var Calendar = /** @class */ (function () {
             });
         }
     };
-    // Given a duration singular unit, like "week" or "day", finds a matching view spec.
+    // Given a duration singular unit, like "week" or "day", finds a matching views spec.
     // Preference is given to views that have corresponding buttons.
     Calendar.prototype.getUnitViewSpec = function (unit) {
         var component = this.component;
@@ -7460,7 +7460,7 @@ function buildEventUiBases(eventDefs, eventUiSingleBase, eventUiBySource) {
 var View = /** @class */ (function (_super) {
     __extends(View, _super);
     function View(viewSpec, parentEl) {
-        var _this = _super.call(this, createElement('div', { className: 'fc-view fc-' + viewSpec.type + '-view' })) || this;
+        var _this = _super.call(this, createElement('div', { className: 'fc-views fc-' + viewSpec.type + '-views' })) || this;
         _this.renderDatesMem = memoizeRendering(_this.renderDatesWrap, _this.unrenderDatesWrap);
         _this.renderBusinessHoursMem = memoizeRendering(_this.renderBusinessHours, _this.unrenderBusinessHours, [_this.renderDatesMem]);
         _this.renderDateSelectionMem = memoizeRendering(_this.renderDateSelectionWrap, _this.unrenderDateSelectionWrap, [_this.renderDatesMem]);
@@ -7673,7 +7673,7 @@ var View = /** @class */ (function (_super) {
             this.isNowIndicatorRendered = true;
         }
     };
-    // Immediately unrenders the view's current time indicator and stops any re-rendering timers.
+    // Immediately unrenders the views's current time indicator and stops any re-rendering timers.
     // Won't cause side effects if indicator isn't rendered.
     View.prototype.stopNowIndicator = function () {
         if (this.nowIndicatorTimeoutID) {

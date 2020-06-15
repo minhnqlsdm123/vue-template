@@ -3277,8 +3277,8 @@ function interpolate(start, view, model, ease) {
 
 		target = model[key];
 
-		// if a value is added to the model after pivot() has been called, the view
-		// doesn't contain it, so let's initialize the view to the target value.
+		// if a value is added to the model after pivot() has been called, the views
+		// doesn't contain it, so let's initialize the views to the target value.
 		if (!view.hasOwnProperty(key)) {
 			view[key] = target;
 		}
@@ -5545,7 +5545,7 @@ var controller_doughnut = core_datasetController.extend({
 			_datasetIndex: me.index,
 			_index: index,
 
-			// Desired view properties
+			// Desired views properties
 			_model: {
 				backgroundColor: options.backgroundColor,
 				borderColor: options.borderColor,
@@ -5937,7 +5937,7 @@ var controller_line = core_datasetController.extend({
 		point._datasetIndex = datasetIndex;
 		point._index = index;
 
-		// Desired view properties
+		// Desired views properties
 		point._model = {
 			x: x,
 			y: y,
@@ -6329,7 +6329,7 @@ var controller_polarArea = core_datasetController.extend({
 			_index: index,
 			_scale: scale,
 
-			// Desired view properties
+			// Desired views properties
 			_model: {
 				backgroundColor: options.backgroundColor,
 				borderColor: options.borderColor,
@@ -6541,7 +6541,7 @@ var controller_radar = core_datasetController.extend({
 		point._datasetIndex = me.index;
 		point._index = index;
 
-		// Desired view properties
+		// Desired views properties
 		point._model = {
 			x: x, // value not used in dataset scale, but we want a consistent API between scales
 			y: y,
@@ -8685,7 +8685,7 @@ var exports$4 = core_element.extend({
 		var opts = me._options;
 
 		// Need to regenerate the model because its faster than using extend and it is necessary due to the optimization in Chart.Element.transition
-		// that does _view = _model if ease === 1. This causes the 2nd tooltip update to set properties in both the view and model at the same time
+		// that does _view = _model if ease === 1. This causes the 2nd tooltip update to set properties in both the views and model at the same time
 		// which breaks any animations.
 		var existingModel = me._model;
 		var model = me._model = getBaseModel(opts);
