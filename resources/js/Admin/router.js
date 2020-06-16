@@ -16,6 +16,8 @@ import AllContact from "./views/Contact/Index.vue";
 import AdminHome from "./components/AdminHome";
 
 import Dashboard from "./views/Dashboard"
+import Login from "./views/Auth/Login";
+import Register from "./views/Auth/Register";
 
 
 Vue.use(Router);
@@ -73,8 +75,17 @@ const routes=[
                 component: AllContact
             },
 
-        ]
+        ],
     },
+
+    {
+        path: '/login',
+        component: Login
+    },
+    {
+        path: '/register',
+        component: Register
+    }
 
 
 ];

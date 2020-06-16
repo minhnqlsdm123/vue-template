@@ -10,31 +10,40 @@
 
                 <form @submit.prevent="Register">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Full name">
+                        <input type="text" class="form-control" placeholder="Full name"
+                                v-model="user.name" :class="{'is-invalid':errors.name}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+                        <span class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</span>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" class="form-control" placeholder="Email"
+                                v-model="user.email" :class="{'is-invalid':errors.email}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
+                        <span class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</span>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password"
+                                v-model="user.password" :class="{'is-invalid':errors.password}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                        <span class="invalid-feedback" v-if="errors.password">{{errors.password[0]}}</span>
+
                     </div>
+
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Retype password">
+                        <input type="password" class="form-control" placeholder="Retype password"
+                                v-model="user.password_comfirmation">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -76,3 +85,54 @@
         </div><!-- /.card -->
     </div>
 </template>
+
+<script>
+    import * as auth from '../../service/auth_service'
+    export default {
+        data(){
+            return {
+                user:{
+                    name:'',
+                    email:'',
+                    password:'',
+                    password_confirmation:''
+                },
+                errors:[]
+            }
+        },
+        methods:{
+            Register:async function(){
+                try {
+                    const response = await auth.register(this.user)
+                    console.log(response)
+                }catch (error) {
+                    switch (error.response.status) {
+                        case 422:
+                            this.errors=error.response.data.errors
+                            break
+                        case 401:
+                            toast.fire({
+                                icon:'error',
+                                text: error.response.data.message
+                            })
+                            break
+                        case 500:
+                            toast.fire({
+                                icon:'error',
+                                text: error.response.data.errors
+                            })
+                            break
+                        default:
+                            toast.fire({
+                                icon:'error',
+                                text:'some error occurred, Please try again !'
+                            })
+                            break
+                    }
+                }
+            }
+
+        }
+
+    }
+</script>

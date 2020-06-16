@@ -10,16 +10,16 @@ Vue.use(Router);
 
 const routes_auth=[
 
-            {
-                name:'Login',
-                path: '/',
-                component: Login
-            },
             // {
-            //     name:'register',
-            //     path:'/',
-            //     component:Register
-            // }
+            //     name:'Login',
+            //     path: '/',
+            //     component: Login
+            // },
+            {
+                name:'register',
+                path:'/',
+                component:Register
+            }
 
 ];
 const router_auth = new Router({
