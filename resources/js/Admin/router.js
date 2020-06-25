@@ -19,6 +19,7 @@ import Dashboard from "./views/Dashboard"
 import Login from "./views/Auth/Login";
 import Register from "./views/Auth/Register";
 
+import * as auth from './service/auth_service.js'
 
 Vue.use(Router);
 
@@ -76,11 +77,26 @@ const routes=[
             },
 
         ],
+        // beforeEnter(to, from, next){
+        //     if(!auth.isLoggedIn()){
+        //         next('/login');
+        //     }else{
+        //         next();
+        //     }
+        // }
     },
 
     {
         path: '/login',
-        component: Login
+        component: Login,
+        name:'login',
+        // beforeEnter(to, from, next){
+        //     if(!auth.isLoggedIn()){
+        //         next();
+        //     }else{
+        //         next('');
+        //     }
+        // }
     },
     {
         path: '/register',

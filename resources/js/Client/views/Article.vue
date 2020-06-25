@@ -49,11 +49,15 @@ export default {
         }
     },
     created() {
+        this.$Progress.start()
+
         this.axios
             .get('/article/')
             .then((response)=>{
                 this.posts=response.data
             })
+        this.$Progress.finish()
+
     }
 }
 </script>

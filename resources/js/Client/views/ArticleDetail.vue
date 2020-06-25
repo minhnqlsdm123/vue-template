@@ -156,7 +156,7 @@
                 <div class="sidebar-box ftco-animate fadeInUp ftco-animated">
                     <div class="categories">
                         <h3>Categories</h3>
-                        <li v-for="category in categories"><a href="#">{{category.name}}<span class="ion-ios-arrow-forward"></span></a></li>
+                        <li v-for="category in categories"><router-link :to="{name:'filter',params:{id:category.slug}}">{{category.name}}<span class="ion-ios-arrow-forward"></span></router-link></li>
 
                     </div>
                 </div>

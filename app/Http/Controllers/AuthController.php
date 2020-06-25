@@ -13,7 +13,7 @@ class AuthController extends Controller
         $this->validate($request,[
            'name'=>'required|string|max:255',
             'email'=>'required|string|email',
-            'password'=>'required|string|confirmed'
+            'password'=>'required|string'
         ]);
         $user = new User([
             'name'=>$request->input('name'),
@@ -80,6 +80,7 @@ class AuthController extends Controller
 
     public function logout(Request $request){
         $request->user()->token()->revoke();
+        dd($request->user()->token()->revoke());
         return response()->json([
             'message'=>'Logout Successfully !',
             'status_code'=>200

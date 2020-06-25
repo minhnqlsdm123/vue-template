@@ -24,3 +24,4 @@ Route::group(['prefix'=>'admin'],function (){
 Route::get('/home','PageController@home');
 Route::get('/contact_us','PageController@contact_us');
 Route::get('/article','PageController@article');
+Route::get('/home/category/{slug}','PageController@filterByCategory');

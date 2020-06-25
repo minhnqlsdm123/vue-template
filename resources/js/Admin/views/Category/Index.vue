@@ -44,7 +44,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(category,stt) in categories">
+                <tr     v-if="categories.length"
+                        v-for="(category,stt) in categories">
                     <td>{{stt+1}}</td>
                     <td>{{category.name}}</td>
                     <td>{{category.slug}}</td>
@@ -57,6 +58,11 @@
                         <button class="btn btn-danger" @click="DeleteCategory(category)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
+                    </td>
+                </tr>
+                <tr v-if="!categories.length">
+                    <td colspan="6">
+                        <div class="alert alert-danger" role="alert">Sorry :( No data found.</div>
                     </td>
                 </tr>
                 </tbody>
@@ -104,7 +110,6 @@
                 </div>
             </form>
         </b-modal>
-
 
     </div>
 
@@ -284,7 +289,7 @@ export default {
                 console.log(response)
                 this.hideModalCategory()
                 this.getDataCategory()
-                
+
             }catch (error) {
                 switch (error.response.status) {
                     case 422:

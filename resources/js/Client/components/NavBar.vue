@@ -14,12 +14,12 @@
                         <li class="nav-item"><router-link  v-bind:to="{name:'Article'}" class="nav-link">Article</router-link></li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link " href="#" id="navbarDropdown" data-toggle="dropdown"  aria-expanded="false">
+                            <a class="nav-link "  id="navbarDropdown" data-toggle="dropdown"  aria-expanded="false">
                                 Category
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                                 <ul class="navbar-nav ml-auto" v-for="category in categories">
-                                    <li><router-link   :to="{name:'filter',params:{id:category.id}}" class="dropdown-item" href="#">
+                                    <li><router-link   :to="{name:'filter',params:{id:category.slug}}" class="dropdown-item">
                                         {{category.name}}</router-link></li>
                                 </ul>
                             </div>

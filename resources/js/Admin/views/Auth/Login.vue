@@ -89,6 +89,8 @@
             Login: async function(){
                 try {
                     const response = await auth.login(this.user)
+                    this.errors={}
+                    this.$router.push({name:'Dashboard'})
                     console.log(response)
                 }catch (error) {
                     switch (error.response.status) {

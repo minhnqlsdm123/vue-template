@@ -19,7 +19,7 @@
                         <span id="description-error" class="error invalid-feedback" v-if="errors.description" >{{errors.description[0]}}</span>
                     </div>
                     <div class="form-group">
-                        <label for="content">CONTENT</label>
+                        <label >CONTENT</label>
                         <ckeditor v-model="post.content" id="content" name="content" v-bind:class="{'is-invalid':errors.content}" ></ckeditor>
                         <p class="text-danger" v-if="errors.content">{{errors.content[0]}}</p>
                         <span id="content-error" class="error invalid-feedback" v-if="errors.content" >{{errors.content[0]}}</span>
@@ -43,6 +43,7 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
+
         </div>
     </section>
 
@@ -70,6 +71,7 @@ export default {
             try {
                 const response = await categoryService.showAllCategory()
                 this.categories=response.data
+
             }catch (error) {
                 toast.fire({
                     icon:'error',
@@ -78,10 +80,12 @@ export default {
             }
         },
         getDataPost: function(post,params){
+            this.$Progress.start()
             this.axios
                 .get(`/api/post/edit/${this.$route.params.id}`)
                 .then((response)=>{
                     this.post=response.data
+                    this.$Progress.finish()
                 })
             // try {
             //     // const response= await postService.editPost(post.id,params)
@@ -101,6 +105,7 @@ export default {
 
         },
         UpdatePost(){
+            this.$Progress.start()
             let formdata= new FormData()
             formdata.append('name',this.post.name)
             formdata.append('description',this.post.description)
@@ -116,6 +121,7 @@ export default {
                         text:'Update Post successfully !'
                     })
                     this.$router.push({name:'AllPost'})
+                    this.$Progress.finish()
                 })
                 .catch((error)=>{
                     switch (error.response.status) {

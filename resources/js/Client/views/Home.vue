@@ -40,7 +40,6 @@
 <!--        </div>-->
 <!--        <Loader/>-->
         <pagination v-bind:pagination="pagination" v-on:click.native="getData(pagination.current_page)" :offset="1"></pagination>
-
     </section>
 
 </template>
@@ -71,39 +70,17 @@ import Pagination from "../components/Pagination";
         },
         methods:{
             getData:async function(page){
-                // this.page ++
-                // this.axios
-                //     .get(this.url)
-                //     .then((response)=>{
-                //         this.posts=response.data.data
-                        // if(this.posts.length){
-                        //     this.posts = this.posts.concat(this.posts)
-                        //     $state.loaded()
-                        // }else{
-                        //     $state.complete()
-                        // }
-
-                    // })
-                const response=await pageService.homeLoadData(page)
-                this.posts=response.data.data
-                this.pagination=response.data
-
-            },
-            makePagination(data){
-                let pagination = {
-                    current_page:data.current_page,
-                    last_page:data.last_page,
-                    next_page_url:data.next_page_url,
-                    prev_page_url:data.prev_page_url
+                try {
+                    this.$Progress.start()
+                    const response=await pageService.homeLoadData(page)
+                    this.posts=response.data.data
+                    this.pagination=response.data
+                    this.$Progress.finish()
+                }catch (e) {
+                    this.$Progress.fail()
                 }
-                this.pagination=pagination
-                // console.log(this.pagination)
             },
 
-            fetchPaginate(url){
-                this.url=url
-                this.getDataPost()
-            }
 
         }
     }

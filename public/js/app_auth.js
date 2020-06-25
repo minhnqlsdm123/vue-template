@@ -2049,48 +2049,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context.sent;
+                this.errors = {};
+                this.$router.push({
+                  name: 'Dashboard'
+                });
                 console.log(response);
-                _context.next = 20;
+                _context.next = 22;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 _context.t1 = _context.t0.response.status;
-                _context.next = _context.t1 === 422 ? 12 : _context.t1 === 401 ? 14 : _context.t1 === 500 ? 16 : 18;
+                _context.next = _context.t1 === 422 ? 14 : _context.t1 === 401 ? 16 : _context.t1 === 500 ? 18 : 20;
                 break;
 
-              case 12:
-                this.errors = _context.t0.response.data.errors;
-                return _context.abrupt("break", 20);
-
               case 14:
-                toast.fire({
-                  icon: 'error',
-                  text: _context.t0.response.data.message
-                });
-                return _context.abrupt("break", 20);
+                this.errors = _context.t0.response.data.errors;
+                return _context.abrupt("break", 22);
 
               case 16:
                 toast.fire({
                   icon: 'error',
-                  text: _context.t0.response.data.errors
+                  text: _context.t0.response.data.message
                 });
-                return _context.abrupt("break", 20);
+                return _context.abrupt("break", 22);
 
               case 18:
                 toast.fire({
                   icon: 'error',
-                  text: 'some error occurred, Please try again !'
+                  text: _context.t0.response.data.errors
                 });
-                return _context.abrupt("break", 20);
+                return _context.abrupt("break", 22);
 
               case 20:
+                toast.fire({
+                  icon: 'error',
+                  text: 'some error occurred, Please try again !'
+                });
+                return _context.abrupt("break", 22);
+
+              case 22:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 7]]);
+        }, _callee, this, [[0, 9]]);
       }));
 
       function Login() {
@@ -2238,47 +2242,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context.sent;
                 console.log(response);
-                _context.next = 20;
+                this.$router.push('/login');
+                _context.next = 21;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 _context.t1 = _context.t0.response.status;
-                _context.next = _context.t1 === 422 ? 12 : _context.t1 === 401 ? 14 : _context.t1 === 500 ? 16 : 18;
+                _context.next = _context.t1 === 422 ? 13 : _context.t1 === 401 ? 15 : _context.t1 === 500 ? 17 : 19;
                 break;
 
-              case 12:
+              case 13:
                 this.errors = _context.t0.response.data.errors;
-                return _context.abrupt("break", 20);
+                return _context.abrupt("break", 21);
 
-              case 14:
+              case 15:
                 toast.fire({
                   icon: 'error',
                   text: _context.t0.response.data.message
                 });
-                return _context.abrupt("break", 20);
+                return _context.abrupt("break", 21);
 
-              case 16:
+              case 17:
                 toast.fire({
                   icon: 'error',
                   text: _context.t0.response.data.errors
                 });
-                return _context.abrupt("break", 20);
+                return _context.abrupt("break", 21);
 
-              case 18:
+              case 19:
                 toast.fire({
                   icon: 'error',
                   text: 'some error occurred, Please try again !'
                 });
-                return _context.abrupt("break", 20);
+                return _context.abrupt("break", 21);
 
-              case 20:
+              case 21:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 7]]);
+        }, _callee, this, [[0, 8]]);
       }));
 
       function Register() {
@@ -94128,20 +94133,52 @@ module.exports = g;
 /*!****************************************************!*\
   !*** ./resources/js/Admin/service/auth_service.js ***!
   \****************************************************/
-/*! exports provided: login, register */
+/*! exports provided: register, login, isLoggedIn, logout, getAccessToken */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isLoggedIn", function() { return isLoggedIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAccessToken", function() { return getAccessToken; });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/Admin/service/http_service.js");
 
-function login(user) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().post('/auth/login', user);
-}
 function register(user) {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().post('/auth/register', user);
+}
+function login(user) {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().post('/auth/login', user).then(function (response) {
+    if (response.status == 200) {
+      setToken(response.data);
+    }
+
+    return response.data;
+  });
+}
+
+function setToken(user) {// const token = jwt.sign({user:user}, 'laraveldsadasvueasdasdtoken');
+  // const token = jwt.sign({user:user},'laraveldasvuefdjstoken');
+  // localStorage.setItem('laravel-vue-token', token)
+}
+
+function isLoggedIn() {
+  var token = localStorage.getItem('laravel-vue-token');
+  return token != null;
+}
+function logout() {
+  Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get('/auth/logout');
+  localStorage.removeItem('laravel-vue-token');
+}
+function getAccessToken() {
+  var token = localStorage.getItem('laravel-vue-token');
+
+  if (!token) {
+    return null;
+  } // const tokenData= jwt.decode(token)
+  // return tokenData.user.access_token
+
 }
 
 /***/ }),
@@ -94160,17 +94197,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store */ "./resources/js/Admin/store.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth_service */ "./resources/js/Admin/service/auth_service.js");
+
 
 
 function http() {
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.create({
-    baseURL: _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.apiURL
+    baseURL: _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.apiURL,
+    headers: {
+      Authorization: 'Bearer' + _auth_service__WEBPACK_IMPORTED_MODULE_2__["getAccessToken"]()
+    }
   });
 }
 function httpFile() {
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.create({
     baseURL: _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.apiURL,
     headers: {
+      Authorization: 'Bearer' + _auth_service__WEBPACK_IMPORTED_MODULE_2__["getAccessToken"](),
       'Content-Type': 'multipart/form-data'
     }
   });
@@ -94346,15 +94389,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/Admin/views/Auth/Register.vue ***!
   \****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Register_vue_vue_type_template_id_a3267d4a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Register.vue?vue&type=template&id=a3267d4a& */ "./resources/js/Admin/views/Auth/Register.vue?vue&type=template&id=a3267d4a&");
 /* harmony import */ var _Register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Register.vue?vue&type=script&lang=js& */ "./resources/js/Admin/views/Auth/Register.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -94384,7 +94426,7 @@ component.options.__file = "resources/js/Admin/views/Auth/Register.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/Admin/views/Auth/Register.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

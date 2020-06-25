@@ -38,7 +38,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(post,stt) in posts">
+                <tr      v-show="posts.length"
+                        v-for="(post,stt) in posts">
                     <td>{{stt+1}}</td>
                     <td>{{post.name}}</td>
                     <td v-if="post.category_id">{{post.category.name}}</td>
@@ -52,7 +53,11 @@
                     </td>
                 </tr>
 
-
+                <tr v-show="!posts.length">
+                    <td colspan="6">
+                        <div class="alert alert-danger" role="alert">Sorry :( No data found.</div>
+                    </td>
+                </tr>
                 </tbody>
             </table>
             <div class="card-footer">
@@ -62,6 +67,7 @@
             </div>
 
         </div>
+
     </div>
 </template>
 <script>
@@ -111,7 +117,10 @@
     //     }
     // },
     methods:{
+
         getDataPost:async function(page){
+            this.$Progress.start()
+
             try {
                 const response= await postService.loadPost(page)
                 // let $this = this
@@ -119,17 +128,19 @@
                 // this.makePagination(response.data)
                 this.pagination = response.data
                 console.log(this.pagination)
+                this.$Progress.finish()
 
             }catch (e) {
                 toast.fire({
                     icon:'error',
                     text:'Ooop, something wrong ! Please try again'
                 })
+                this.$Progress.fail();
             }
         },
         
         searchData(page) {
-            // this.$Progress.start();
+            this.$Progress.start();
             this.axios.get(
                 "/api/post/search/" +
                 this.queryFiled +
@@ -143,7 +154,7 @@
                     this.pagination = response.data
                     // this.$Progress.finish();
                     console.log(this.pagination);
-
+                    this.$Progress.finish();
                 })
                 .catch(e => {
                     console.log(e);

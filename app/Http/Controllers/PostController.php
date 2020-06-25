@@ -32,6 +32,7 @@ class PostController extends Controller
 
 
     public function form(Request $request){
+//        dd($request->all());
         $this->validate($request,[
             'name'=>'required|string',
             'description'=>'required|string',

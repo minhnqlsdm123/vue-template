@@ -15,12 +15,13 @@
                                     <span class="mos">{{post.created_at}}</span>
                                 </div>
                             </div>
-                            <h3 class="heading mb-3"><router-link href="#" :to="{name:'ArticleDetail',params:{id:post.slug}}">{{post.name}}</router-link></h3>
+                            <h3 class="heading mb-3"><router-link  :to="{name:'ArticleDetail',params:{id:post.slug}}">{{post.name}}</router-link></h3>
                             <p>{{post.description}}</p>
                             <p><a href="#" class="btn-custom"><span class="ion-ios-arrow-round-forward mr-3"></span>Read more</a></p>
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="row mt-5">
                 <div class="col text-center">
@@ -48,10 +49,12 @@
             }
         },
         created() {
+            this.$Progress.start()
             this.axios
-                .get(`/home/category/${this.$router.params.slug}`)
+                .get(`/api/home/category/${this.$route.params.id}`)
                 .then((response)=>{
-                    this.posts=response.data.data
+                    this.posts=response.data
+                    this.$Progress.finish()
                 })
         }
     }

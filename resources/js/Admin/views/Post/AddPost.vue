@@ -43,7 +43,6 @@
 
                                 <img v-if="imageDisplay==true" ref="newPostImageDisplay" alt="" class="w-h-image-cover">
                                 <img v-else src="font-end/images/No_Picture.jpg" alt="" class="w-h-image-cover">
-                                <p class="text-success">{{filename}}</p>
                             </div>
                         </div>
                     </div>
@@ -55,7 +54,7 @@
             </div>
 
         </div>
-    </section>
+N    </section>
 
 </template>
 <script>
@@ -78,9 +77,6 @@
                 imageDisplay:false
             }
         },
-        // mounted(){
-        //     this.getCkeditor();
-        // },
 
         created() {
             this.getDataCategory()
@@ -91,20 +87,24 @@
 //             }
 // ,
             getDataCategory:async function(){
+                this.$Progress.start()
                 try {
                     const response = await categoryService.showAllCategory()
                     this.categories=response.data
+                    this.$Progress.finish()
                 }catch (error) {
                     toast.fire({
                         icon:'error',
                         text:'Something wrongg. try again !'
                     })
+                    this.$Progress.fail()
                 }
             },
             UploadImage(e){
                 this.imageDisplay = true
 
                 this.post.image=this.$refs.newPostImage.files[0]
+                // this.filename=this.$refs.filename.file[0].name
                 let reader = new FileReader()
 
                 reader.addEventListener('load', function () {
@@ -113,6 +113,7 @@
                 reader.readAsDataURL(this.post.image)
             },
             AddPost:async function() {
+                this.$Progress.start()
                 let formdata = new FormData()
                 formdata.append('name', this.post.name)
                 formdata.append('description', this.post.description)
@@ -127,6 +128,8 @@
                         text:'Add new post successfully !'
                     })
                     this.$router.push({name:'AllPost'})
+                    this.$Progress.finish()
+
                 } catch(error) {
                     switch (error.response.status) {
                         case 422:

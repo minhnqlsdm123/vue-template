@@ -32,9 +32,9 @@ const VueProgressBarOptions = {
     failedColor: '#87111d',
     thickness: '5px',
     transition: {
-        speed: '0.2s',
+        speed: '0.5s',
         opacity: '0.6s',
-        termination: 300
+        termination: 500
     },
     autoRevert: true,
     location: 'top',

@@ -4,6 +4,7 @@
         <PublicHome/>
         <Loader/>
         <Footer/>
+        <vue-progress-bar></vue-progress-bar>
 
     </div>
 

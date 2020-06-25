@@ -25,14 +25,16 @@ class PageController extends Controller
     }
 
     public function articleDetail($slug){
-        $post = Post::where('slug',$slug)->firstOrFail();
+        $post = Post::where('slug',$slug)->first();
         return response($post);
     }
 
     public function filterByCategory($slug){
+
         $cate=Category::where('slug','=',$slug)->first();
-        $post=Post::where('category_id','=',$cate['id'])->paginate('5');
-        return response($post);
+//        dd($cate->id);
+        $posts=Post::all()->where('category_id','=',$cate->id);
+        return response($posts);
 //        dd($cate);
     }
 }

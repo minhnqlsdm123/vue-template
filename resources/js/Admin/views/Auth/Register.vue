@@ -105,6 +105,7 @@
                 try {
                     const response = await auth.register(this.user)
                     console.log(response)
+                    this.$router.push('/login')
                 }catch (error) {
                     switch (error.response.status) {
                         case 422:

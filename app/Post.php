@@ -11,8 +11,7 @@ class Post extends Model
     protected $table='posts';
 
     public function category(){
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class);
     }
-
 
 }

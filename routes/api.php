@@ -38,7 +38,7 @@ Route::group(['prefix'=>'auth'],function (){
 //        })->middleware('scope:do_anything,can_create');
 //    });
 //});
-//
+
 Route::group(['prefix'=>'category'],function(){
     Route::get('/','CategoriesController@index');
     Route::get('/all/','CategoriesController@showAllCategory');

@@ -13,6 +13,7 @@ import router from '../Admin/router.js';
 import VueAxios from 'vue-axios';
 import swal from 'sweetalert2';
 import CKEditor from 'ckeditor4-vue';
+import VueProgressBar from 'vue-progressbar'
 
 
 import AdminMaster from "../Admin/AdminMaster";
@@ -26,6 +27,36 @@ Vue.component('home-main', PublicMaster);
 Vue.component('loader', Loader);
 Vue.component('auth',AuthMain);
 
+
+const VueProgressBarOptions = {
+    color: '#50d38a',
+    failedColor: '#87111d',
+    thickness: '5px',
+    transition: {
+        speed: '0.5s',
+        opacity: '0.6s',
+        termination: 300
+    },
+    autoRevert: true,
+    location: 'top',
+    inverse: false
+};
+
+// const VueProgressBarOptions = {
+//   color:'#50d38a',
+//   failedColor:'#87111d',
+//   thickness:'5px',
+//     transition: {
+//       speed:'0.5s',
+//       opacity:'0.6s',
+//       termination:400
+//     },
+//     aautoRevert: true,
+//     location: 'top',
+//     inverse: false
+//
+// };
+Vue.use(VueProgressBar, VueProgressBarOptions);
 
 window.swal = swal;
 
