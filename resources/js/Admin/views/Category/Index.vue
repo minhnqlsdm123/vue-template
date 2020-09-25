@@ -120,9 +120,16 @@
 <script>
     import * as categoryService from '../../service/category_service'
     import Pagination from "../../components/Pagination";
+    import Datatable from "../../components/Datatable";
+    import PaginationExample from "../../components/PaginationExample";
 export default {
-    components:{Pagination},
+    components:{
+        Pagination,
+        Datatable,
+        PaginationExample
+    },
     data(){
+
         return {
             editMode: false,
             query: "",

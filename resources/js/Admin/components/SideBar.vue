@@ -34,6 +34,15 @@
                             </p>
                         </router-link>
                     </li>
+                    <li class="nav-item has-treeview menu open">
+                        <router-link to="/developer" class="nav-link">
+                            <i class="fa fa-newspaper" aria-hidden="true"></i>
+                            <p>
+                                Developer
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </router-link>
+                    </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>

@@ -11,13 +11,14 @@ class CategoriesController extends Controller implements iUploadImageManage
 {
     public function __construct()
     {
-//        $this->middleware('auth');
+//        $this->middleware('auth:api');
 
     }
     public function index(){
 //        $categories = Category::all()->toArray();
 //        return array_reverse($categories);
         $categories=Category::orderBy('id','desc')->paginate('3');
+        dd($categories);
         return response($categories);
     }
 

@@ -69,156 +69,158 @@
         </div>
 
     </div>
+
 </template>
 <script>
-    import * as postService from '../../service/post_service';
-    import Pagination from '../../components/Pagination'
-    export default {
-        components: {Pagination },
-    data(){
-        return {
-            posts:[],
-            url:'/post',
-            query: "",
-            queryFiled: "name",
-            pagination: {
-                total: 0,
-                per_page: 2,
-                from: 1,
-                to: 0,
-                current_page: 1
-            },
-        }
-    },
-        watch: {
-            query: function(newQ, old) {
-                if (newQ === "") {
-                    this.getDataPost();
-                } else {
-                    this.searchData();
-                }
-            }
 
-        },
-        mounted() {
-            if(this.query===""){
-                this.getDataPost(this.pagination.current_page);
-            }else{
-                this.searchData(this.pagination.current_page);
-            }
+     import * as postService from '../../service/post_service';
+     import Pagination from '../../components/Pagination'
+     export default {
+         components: {Pagination },
+     data(){
+         return {
+             posts:[],
+             url:'/post',
+             query: "",
+             queryFiled: "name",
+             pagination: {
+                 total: 0,
+                 per_page: 2,
+                 from: 1,
+                 to: 0,
+                 current_page: 1
+             },
+         }
+     },
+         watch: {
+             query: function(newQ, old) {
+                 if (newQ === "") {
+                     this.getDataPost();
+                 } else {
+                     this.searchData();
+                 }
+             }
 
-        },
+         },
+         mounted() {
+             if(this.query===""){
+                 this.getDataPost(this.pagination.current_page);
+             }else{
+                 this.searchData(this.pagination.current_page);
+             }
 
-    // created() {
-    //     if(this.query===""){
-    //         this.getDataPost(this.pagination.current_page);
-    //     }else{
-    //         this.searchData(this.pagination.current_page);
-    //     }
-    // },
-    methods:{
+         },
 
-        getDataPost:async function(page){
-            this.$Progress.start()
+     // created() {
+     //     if(this.query===""){
+     //         this.getDataPost(this.pagination.current_page);
+     //     }else{
+     //         this.searchData(this.pagination.current_page);
+     //     }
+     // },
+     methods:{
 
-            try {
-                const response= await postService.loadPost(page)
-                // let $this = this
-                this.posts=response.data.data
-                // this.makePagination(response.data)
-                this.pagination = response.data
-                console.log(this.pagination)
-                this.$Progress.finish()
+         getDataPost:async function(page){
+             this.$Progress.start()
 
-            }catch (e) {
-                toast.fire({
-                    icon:'error',
-                    text:'Ooop, something wrong ! Please try again'
-                })
-                this.$Progress.fail();
-            }
-        },
-        
-        searchData(page) {
-            this.$Progress.start();
-            this.axios.get(
-                "/api/post/search/" +
-                this.queryFiled +
-                "/" +
-                this.query +
-                "?page=" +
-                this.pagination.current_page
-            )
-                .then(response => {
-                    this.posts = response.data.data;
-                    this.pagination = response.data
-                    // this.$Progress.finish();
-                    console.log(this.pagination);
-                    this.$Progress.finish();
-                })
-                .catch(e => {
-                    console.log(e);
-                    this.$Progress.fail();
-                });
-        },
-        DeletePost(post){
-            toast.fire({
-                icon:'warning',
-                title:'Do you want delete post '+'"'+post.name+'" ?',
-                showConfirmButton:true,
-                showCancelButton:true,
-                cancelButtonColor:'#dc3545'
+             try {
+                 const response= await postService.loadPost(page)
+                 // let $this = this
+                 this.posts=response.data.data
+                 // this.makePagination(response.data)
+                 this.pagination = response.data
+                 console.log(this.pagination)
+                 this.$Progress.finish()
 
-            })
-            .then((result)=>{
-                if (result.value){
-                    // this.axios
-                    //     .delete('/api/post/delete/'+id)
-                    //     .then((response)=>{
-                    //         let i = this.posts.map(item=>item.id).indexOf(id)
-                    //         toast.fire({
-                    //             icon:'success',
-                    //             text:'delete post successfully !'
-                    //         })
-                    //         this.getDataPost()
-                    //     })
-                    try {
-                        const response = postService.deletePost(post.id)
-                        toast.fire({
-                            icon:'success',
-                            text:'Delete Post successfully !'
-                        })
-                        this.getDataPost()
-                    }catch (error) {
-                        toast.fire({
-                            icon:'error',
-                            text:'Something wrongg !'
-                        })
-                    }
-                }
-            })
-            .catch(()=>{
-                toast.fire({
-                    icon:'error',
-                    text:'Oopp, something wrongg !'
-                })
-            })
-        },
-        // makePagination(data){
-        //     let pagination = {
-        //         current_page:data.current_page,
-        //         last_page:data.last_page,
-        //         next_page_url:data.next_page_url,
-        //         prev_page_url:data.prev_page_url
-        //     }
-        //     this.pagination=pagination
-        //     console.log(this.pagination)
-        // },
-        //
-        // fetchPaginate(url){
-        //     this.url=url
-        //     this.getDataPost()
-        // }
-    }
-}
+             }catch (e) {
+                 toast.fire({
+                     icon:'error',
+                     text:'Ooop, something wrong ! Please try again'
+                 })
+                 this.$Progress.fail();
+             }
+         },
+
+         searchData(page) {
+             this.$Progress.start();
+             this.axios.get(
+                 "/api/post/search/" +
+                 this.queryFiled +
+                 "/" +
+                 this.query +
+                 "?page=" +
+                 this.pagination.current_page
+             )
+                 .then(response => {
+                     this.posts = response.data.data;
+                     this.pagination = response.data
+                     // this.$Progress.finish();
+                     console.log(this.pagination);
+                     this.$Progress.finish();
+                 })
+                 .catch(e => {
+                     console.log(e);
+                     this.$Progress.fail();
+                 });
+         },
+         DeletePost(post){
+             toast.fire({
+                 icon:'warning',
+                 title:'Do you want delete post '+'"'+post.name+'" ?',
+                 showConfirmButton:true,
+                 showCancelButton:true,
+                 cancelButtonColor:'#dc3545'
+
+             })
+             .then((result)=>{
+                 if (result.value){
+                     // this.axios
+                     //     .delete('/api/post/delete/'+id)
+                     //     .then((response)=>{
+                     //         let i = this.posts.map(item=>item.id).indexOf(id)
+                     //         toast.fire({
+                     //             icon:'success',
+                     //             text:'delete post successfully !'
+                     //         })
+                     //         this.getDataPost()
+                     //     })
+                     try {
+                         const response = postService.deletePost(post.id)
+                         toast.fire({
+                             icon:'success',
+                             text:'Delete Post successfully !'
+                         })
+                         this.getDataPost()
+                     }catch (error) {
+                         toast.fire({
+                             icon:'error',
+                             text:'Something wrongg !'
+                         })
+                     }
+                 }
+             })
+             .catch(()=>{
+                 toast.fire({
+                     icon:'error',
+                     text:'Oopp, something wrongg !'
+                 })
+             })
+         },
+         // makePagination(data){
+         //     let pagination = {
+         //         current_page:data.current_page,
+         //         last_page:data.last_page,
+         //         next_page_url:data.next_page_url,
+         //         prev_page_url:data.prev_page_url
+         //     }
+         //     this.pagination=pagination
+         //     console.log(this.pagination)
+         // },
+         //
+         // fetchPaginate(url){
+         //     this.url=url
+         //     this.getDataPost()
+         // }
+     }
+ }
 </script>

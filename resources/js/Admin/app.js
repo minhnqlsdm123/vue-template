@@ -59,13 +59,29 @@ const toast = swal.mixin({
 
 window.toast = toast;
 
+// Vue.component(
+//     'passport-clients',
+//     require('../components/passport/Clients.vue').default
+// );
+//
+// Vue.component(
+//     'passport-authorized-clients',
+//     require('../components/passport/AuthorizedClients.vue').default
+// );
+//
+// Vue.component(
+//     'passport-personal-access-tokens',
+//     require('../components/passport/PersonalAccessTokens.vue').default
+// );
+
+
 Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
 Vue.use( CKEditor );
 Vue.use(DataTable);
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('tags-input', VoerroTagsInput);
-
+Vue.prototype.$axios = axios
 
 
 

@@ -7,6 +7,7 @@ import AllCategory from './views/Category/Index.vue'
 import AddCategory from "./views/Category/AddCategory.vue";
 import EditCategory from "./views/Category/EditCategory.vue";
 
+
 import AllPost from "./views/Post/Index.vue";
 import AddPost from "./views/Post/AddPost.vue";
 import EditPost from "./views/Post/EditPost.vue";
@@ -19,6 +20,8 @@ import Dashboard from "./views/Dashboard"
 import Login from "./views/Auth/Login";
 import Register from "./views/Auth/Register";
 
+import Developer from "./views/Developer"
+
 import * as auth from './service/auth_service.js'
 
 Vue.use(Router);
@@ -28,11 +31,17 @@ const routes=[
       path:'/',
       component: AdminHome,
       children:[
+
               {
                 path: '/',
                 name: 'Dashboard',
                 component: Dashboard
               },
+          {
+              path: '/developer',
+              name: 'Developer',
+              component: Developer
+          },
             {
                 //Category
                 path: '/category',

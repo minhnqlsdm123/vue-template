@@ -60,12 +60,9 @@ Route::group(['prefix'=>'post'],function () {
 
 });
 //
-//Route::group(['prefix'=>'contact'],function (){
-//   Route::get('/','ContactController@index');
-//});
 //
 //Route::get('/home','HomeController@index');
-//Route::get('/contact','HomeController@contact');
+Route::get('/contacts','ContactController@index');
 //
 Route::get('/home','PageController@home');
 Route::get('/contact_us','PageController@contact_us');

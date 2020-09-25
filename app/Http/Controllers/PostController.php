@@ -59,7 +59,7 @@ class PostController extends Controller
     public function update(Request $request,$id){
             $post=$this->post::findOrFail($id);
             $this->validate($request,[
-            'name'=>'required|string',
+            'name'=>'required|string|unique:posts',
             'description'=>'required|string',
             'content'=>'required|string',
             'image'=>'required|image',

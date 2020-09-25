@@ -8,4 +8,6 @@ class Tag extends Model
 {
     use \Spatie\Tags\HasTags;
 
+
+
 }

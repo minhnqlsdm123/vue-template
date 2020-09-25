@@ -6,9 +6,28 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 class AuthController extends Controller
+
 {
+    use  ThrottlesLogins;
+
+    /**
+     * The maximum number of attempts to allow.
+     *
+     * @return int
+     */
+//    protected $maxAttempts = 5;
+
+
+    /**
+     * The number of minutes to throttle for.
+     *
+     * @return int
+     */
+    protected $decayMinutes = 1;
+
     public function register(Request $request){
         $this->validate($request,[
            'name'=>'required|string|max:255',
@@ -40,13 +59,22 @@ class AuthController extends Controller
             'password'=>'required|string',
             'remember_me'=>'boolean'
         ]);
+//        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+//            $this->hasTooManyLoginAttempts($request)) {
+//            $this->fireLockoutEvent($request);
+//
+//            return $this->sendLockoutResponse($request);
+//        }
+        $token = Auth::attempt(['email' => $request->email, 'password' => $request->password]) ;
 
-        if (!Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
+        if (! $token){
+            $this->incrementLoginAttempts($request);
             return response()->json([
                'message'=>'Invalid Username/Password',
                 'status_code'=> 401
             ],401);
         }
+
         $user=$request->user();
 
         if ($user->role == 'administrator'){
@@ -80,7 +108,6 @@ class AuthController extends Controller
 
     public function logout(Request $request){
         $request->user()->token()->revoke();
-        dd($request->user()->token()->revoke());
         return response()->json([
             'message'=>'Logout Successfully !',
             'status_code'=>200

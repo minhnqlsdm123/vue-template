@@ -20,6 +20,7 @@ Route::group(['prefix'=>'admin'],function (){
     Route::get('/','HomeController@admin');
 });
 
+//Route::resource('/contacts', 'ContactController');
 
 Route::get('/home','PageController@home');
 Route::get('/contact_us','PageController@contact_us');

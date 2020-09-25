@@ -1,4 +1,5 @@
 import {http} from "./http_service";
+import jwt from "jsonwebtoken"
 
 
 
@@ -19,8 +20,9 @@ export function login(user) {
 function setToken(user) {
     // const token = jwt.sign({user:user}, 'laraveldsadasvueasdasdtoken');
     // const token = jwt.sign({user:user},'laraveldasvuefdjstoken');
-    // localStorage.setItem('laravel-vue-token', token)
-
+    const token = jwt.sign({user:user},'vuetemplateadsafasgfsafsafsafaasfa2020')
+    localStorage.setItem('laravel-vue-token', token)
+ddajm
 }
 
 export function isLoggedIn() {

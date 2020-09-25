@@ -127,7 +127,8 @@ N    </section>
                         icon:'success',
                         text:'Add new post successfully !'
                     })
-                    this.$router.push({name:'AllPost'})
+                    console.log(response)
+                    // this.$router.push({name:'AllPost'})
                     this.$Progress.finish()
 
                 } catch(error) {
